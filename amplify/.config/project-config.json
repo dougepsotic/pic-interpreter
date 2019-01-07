@@ -1,0 +1,20 @@
+{
+    "projectName": "picinterpreter",
+    "projectPath": "/Users/dougsharpe/Documents/Technology/Projects/pic-interpreter",
+    "defaultEditor": "code",
+    "frontendHandler": {
+        "javascript": "/Users/dougsharpe/.node_modules_global/lib/node_modules/@aws-amplify/cli/node_modules/amplify-frontend-javascript"
+    },
+    "javascript": {
+        "framework": "react",
+        "config": {
+            "SourceDir": "src",
+            "DistributionDir": "build",
+            "BuildCommand": "npm run-script build",
+            "StartCommand": "npm run-script start"
+        }
+    },
+    "providers": {
+        "awscloudformation": "/Users/dougsharpe/.node_modules_global/lib/node_modules/@aws-amplify/cli/node_modules/amplify-provider-awscloudformation"
+    }
+}

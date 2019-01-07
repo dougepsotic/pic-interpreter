@@ -1,0 +1,57 @@
+{
+    "identityPoolName": "cognitod76adb20_identitypool_d76adb20",
+    "allowUnauthenticatedIdentities": false,
+    "thirdPartyAuth": false,
+    "lambdaLogPolicy": "cognitod76adb20_lambda_log_policy",
+    "openIdLambdaRoleName": "cognitod76adb20_openid_lambda_role",
+    "openIdRolePolicy": "cognitod76adb20_openid_pass_role_policy",
+    "openIdLambdaIAMPolicy": "cognitod76adb20_openid_lambda_iam_policy",
+    "openIdLogPolicy": "cognitod76adb20_openid_lambda_log_policy",
+    "userPoolName": "cognitod76adb20_userpool_d76adb20",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "roleName": "cognitod76adb20_sns-role",
+    "roleExternalId": "cognitod76adb20_role_external_id",
+    "policyName": "cognitod76adb20-sns-policy",
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [
+        "Requires Lowercase",
+        "Requires Uppercase",
+        "Requires Numbers",
+        "Requires Symbols"
+    ],
+    "requiredAttributes": [
+        "email"
+    ],
+    "userpoolClientName": "cognitod76adb20_app_client",
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "mfaLambdaRole": "cognitod76adb20_totp_lambda_role",
+    "mfaLambdaLogPolicy": "cognitod76adb20_totp_lambda_log_policy",
+    "mfaPassRolePolicy": "cognitod76adb20_totp_pass_role_policy",
+    "mfaLambdaIAMPolicy": "cognitod76adb20_totp_lambda_iam_policy",
+    "userpoolClientLambdaRole": "cognitod76adb20_userpoolclient_lambda_role",
+    "userpoolClientLogPolicy": "cognitod76adb20_userpoolclient_lambda_log_policy",
+    "userpoolClientLambdaPolicy": "cognitod76adb20_userpoolclient_lambda_iam_policy",
+    "userpoolClientSetAttributes": false,
+    "useDefault": "default",
+    "unAuthRoleName": "picinterpreter-20190107103538-unauthRole",
+    "authRoleName": "picinterpreter-20190107103538-authRole",
+    "unAuthRoleArn": "arn:aws:iam::748331806655:role/picinterpreter-20190107103538-unauthRole",
+    "authRoleArn": "arn:aws:iam::748331806655:role/picinterpreter-20190107103538-authRole",
+    "resourceName": "cognitod76adb20",
+    "authSelections": "identityPoolAndUserPool"
+}

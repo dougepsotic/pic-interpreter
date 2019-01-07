@@ -1,0 +1,9 @@
+{
+    "bucketName": "picinterpreter3b990ca2d6a3479093294b2a22c5d994",
+    "authPolicyName": "s3_amplify_e16beef5",
+    "unauthPolicyName": "s3_amplify_e16beef5",
+    "authRoleName": "picinterpreter-20190107110708-authRole",
+    "unauthRoleName": "picinterpreter-20190107110708-unauthRole",
+    "authPermissions": "rw",
+    "unauthPermissions": ""
+}
