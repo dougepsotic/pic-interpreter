@@ -2,10 +2,10 @@
 // (c) 2019 Epsotic
 // 
 // Uploads an image to AWS S3 and displays image recognition labels
-// from the AWS Rekognition service
+// from the AWS Rekognition service accessed via REST API
 // 
 // Built using React and AWS Amplify. 
-// Amplify automatially creates the IAM, S3, API Gateway, and Lambda cloud resources.
+// Amplify automatially creates the IAM, S3, API Gateway, and Lambda cloud resources within AWS.
 // 
 import React, { Component } from 'react';
 import Amplify, { API } from 'aws-amplify';
