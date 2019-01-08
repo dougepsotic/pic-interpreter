@@ -142,6 +142,33 @@
 					"unauthPermissions": ""
 				}
 			}
+		},
+		"functioninterpretPic": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/picinterpreter-20190107110708-deployment/amplify-cfn-templates/function/interpretPic-cloudformation-template.json",
+				"Parameters": {}
+			}
+		},
+		"apirekognize": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/picinterpreter-20190107110708-deployment/amplify-cfn-templates/api/rekognize-cloudformation-template.json",
+				"Parameters": {
+					"functioninterpretPicName": {
+						"Fn::GetAtt": [
+							"functioninterpretPic",
+							"Outputs.Name"
+						]
+					},
+					"functioninterpretPicArn": {
+						"Fn::GetAtt": [
+							"functioninterpretPic",
+							"Outputs.Arn"
+						]
+					}
+				}
+			}
 		}
 	},
 	"Outputs": {

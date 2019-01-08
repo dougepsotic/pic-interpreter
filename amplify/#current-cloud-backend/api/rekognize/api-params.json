@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/interpret",
+            "lambdaFunction": "interpretPic",
+            "privacy": {
+                "private": true,
+                "auth": "rw"
+            }
+        }
+    ],
+    "resourceName": "rekognize",
+    "apiName": "picinterpreter803f98e7",
+    "functionArns": [
+        {
+            "lambdaFunction": "interpretPic"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "picinterpreter-20190107110708-authRole",
+        "unAuthRoleName": "picinterpreter-20190107110708-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "interpretPic",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

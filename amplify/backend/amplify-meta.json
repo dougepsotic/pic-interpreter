@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/picinterpreter-20190107110708-deployment/amplify-cfn-templates/auth/cognitoe3b39877-cloudformation-template.yml",
 				"logicalId": "authcognitoe3b39877"
 			},
-			"lastPushTimeStamp": "2019-01-07T18:45:22.029Z",
+			"lastPushTimeStamp": "2019-01-08T18:36:58.630Z",
 			"output": {
 				"AppClientSecret": "tba2npdk4672988006klq4k7mgsu6ij2m3dj1pelbsn6bu177bn",
 				"UserPoolId": "us-east-1_ABwFhdwbo",
@@ -40,12 +40,60 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/picinterpreter-20190107110708-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
 				"logicalId": "storageuploadedPics"
 			},
-			"lastPushTimeStamp": "2019-01-07T18:45:22.030Z",
+			"lastPushTimeStamp": "2019-01-08T18:36:58.632Z",
 			"output": {
 				"BucketName": "picinterpreter3b990ca2d6a3479093294b2a22c5d994",
 				"Region": "us-east-1"
 			},
 			"lastPushDirHash": "83sHr1Rar86D+qd5iD1+IHmlKTY="
+		}
+	},
+	"function": {
+		"interpretPic": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [],
+			"lastBuildTimeStamp": "2019-01-08T15:02:35.769Z",
+			"lastPackageTimeStamp": "2019-01-08T18:35:56.364Z",
+			"distZipFilename": "interpretPic-1546972555-latest-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/picinterpreter-20190107110708-deployment/amplify-cfn-templates/function/interpretPic-cloudformation-template.json",
+				"logicalId": "functioninterpretPic"
+			},
+			"lastPushTimeStamp": "2019-01-08T18:36:58.634Z",
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:748331806655:function:interpretPic",
+				"Name": "interpretPic"
+			},
+			"lastPushDirHash": "rRWyuUfWq/+PpDMyixGS4i0KIV8="
+		}
+	},
+	"api": {
+		"rekognize": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "interpretPic",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/picinterpreter-20190107110708-deployment/amplify-cfn-templates/api/rekognize-cloudformation-template.json",
+				"logicalId": "apirekognize"
+			},
+			"lastPushTimeStamp": "2019-01-08T18:36:58.634Z",
+			"output": {
+				"ApiName": "rekognize",
+				"RootUrl": "https://sg2d41dhxe.execute-api.us-east-1.amazonaws.com/Prod"
+			},
+			"lastPushDirHash": "gA2865izw+VdWnEERdWMGy/u/KE="
 		}
 	}
 }

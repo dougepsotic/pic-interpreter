@@ -7,7 +7,14 @@ const awsmobile =  {
     "aws_user_pools_id": "us-east-1_ABwFhdwbo",
     "aws_user_pools_web_client_id": "7jehbu9utiusolfr92u9gmboqd",
     "aws_user_files_s3_bucket": "picinterpreter3b990ca2d6a3479093294b2a22c5d994",
-    "aws_user_files_s3_bucket_region": "us-east-1"
+    "aws_user_files_s3_bucket_region": "us-east-1",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "rekognize",
+            "endpoint": "https://sg2d41dhxe.execute-api.us-east-1.amazonaws.com/Prod",
+            "region": "us-east-1"
+        }
+    ]
 };
 
 
