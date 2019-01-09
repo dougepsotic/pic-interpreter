@@ -1,10 +1,5 @@
-/*
-Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
-    http://aws.amazon.com/apache2.0/
-or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and limitations under the License.
-*/
+// Pic Interpreter - Lambda Function
+// (c) 2019 Epsotic
 
 var express = require('express')
 var bodyParser = require('body-parser')
@@ -22,14 +17,37 @@ app.use(function(req, res, next) {
   next()
 });
 
+// Setup AWS SDK
 
-/**********************
- * Example get method *
- **********************/
+const AWS = require('aws-sdk')
+AWS.config.update({region: 'us-east-1'})
+
+// GET Method
 
 app.get('/interpret', function(req, res) {
-  var rekognitionLabels = { "Gender": "Male" , "Glasses": "No" };
-  res.json({success: 'Rekognize successful!', url: req.url, data: rekognitionLabels});
+
+  var rekognition = new AWS.Rekognition()
+
+  var params = {
+    Image: {
+     S3Object: {
+      Bucket: req.apiGateway.event.queryStringParameters.bucket, 
+      Name: req.apiGateway.event.queryStringParameters.name
+      // Bucket: "picinterpreter3b990ca2d6a3479093294b2a22c5d994", 
+      // Name: "public/11067-aws-cloud-marketshare.jpg"
+      }
+    }, 
+    MaxLabels: 50, 
+    MinConfidence: 80
+  };
+  
+  rekognition.detectLabels(params, function(err, data) {
+    if (err) console.log(err, err.stack);
+    else {
+      console.log(data);
+      res.json({success: 'Rekognize successful!', url: req.url, data: data});
+    }
+  });
 });
 
 app.get('/interpret/*', function(req, res) {
@@ -83,7 +101,4 @@ app.listen(3000, function() {
     console.log("App started")
 });
 
-// Export the app object. When executing the application local this does nothing. However,
-// to port it to AWS Lambda we will create a wrapper around that will load the app from
-// this file
 module.exports = app
