@@ -18,42 +18,64 @@ const MyTheme = {
   photoPlaceholder: { 'display': 'none' }
 }
 
-var firstTime = true;
-
 function fileToKey(data) {
   const randomInt = Math.floor(Math.random() * (100000 - 1 + 1)) + 1;
   return randomInt + "-" + data.name;
 }
 
-function InterpretPic(picUrl) {
-  var picLabels;
-  if (firstTime) {
-    firstTime = false
-  } else {
+class PicInterpretation extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {attributes: []};
+  }
+
+  componentDidMount() {
     let apiName = "rekognize";
     let path = "/interpret"; 
     let myInit = { 
-      queryStringParameters: { url: picUrl }
+      queryStringParameters: { url: this.props.picUrl }
     }
-    API.get(apiName, path, myInit).then(response => {
-      picLabels = response.data;
-      // Object.keys(response.data).forEach(function(attribute) {
-          // {attribute}: {response.data[attribute]}
-      // });
-    }).catch(error => { console.log(error) });
+    API.get(apiName, path, myInit)
+      .then(output => {
+        let labelList = Object.keys(output.data).map(attribute => {
+          return (
+            <li key={attribute}>
+              {attribute}: {output.data[attribute]}
+            </li>
+          )
+        })
+        this.setState({attributes: labelList});
+      })
+      .catch(error => { console.log(error) });
   }
-  return picLabels;
+
+  render () {
+    return (
+      <div>
+        <h3>Here's what we noticed about your picture:</h3>
+        <ul style={{ listStyleType: "none" }}>{this.state.attributes}</ul>    
+      </div>
+    );
+  }
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {picUrl: ""};
+  }
+   
   render() {
     return (
       <div className="App">
         <h1>Welcome to Pic Interpreter!</h1>
         <h2>Upload a picture to learn about its attributes</h2>
+        {this.state.picUrl.startsWith("http") &&
+          <PicInterpretation picUrl={this.state.picUrl} />
+        }
         <S3Image theme={MyTheme} fileToKey={fileToKey} picker 
-          onLoad={ url => this.InterpretPic(url) } />
-        <div>Here's what we noticed about your picture:</div>
+          onLoad={ url => {this.setState({picUrl: url})} }/>
       </div>
     );
   }
