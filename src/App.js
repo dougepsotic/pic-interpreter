@@ -7,6 +7,11 @@
 // Built using React and AWS Amplify. 
 // Amplify automatially creates the IAM, S3, API Gateway, and Lambda cloud resources within AWS.
 // 
+// TODO Re-render PicInterpretation when additional image is uploaded
+// TODO Delete S3 image object after labels are returned
+// TODO Add Epsotic logo to logged-in header
+// TODO Add Epsotic logo and text to login page
+
 import React, { Component } from 'react';
 import Amplify, { API } from 'aws-amplify';
 import { withAuthenticator, S3Image } from 'aws-amplify-react';
@@ -18,6 +23,7 @@ const MyTheme = {
   photoPlaceholder: { 'display': 'none' }
 }
 
+// Component that renders list of labels returned from AWS Rekognition
 class PicInterpretation extends Component {
 
   constructor(props) {
@@ -29,14 +35,18 @@ class PicInterpretation extends Component {
     let apiName = "rekognize";
     let path = "/interpret"; 
     let myInit = { 
-      queryStringParameters: { name: this.props.name, bucket: aws_exports.aws_user_files_s3_bucket }
+      queryStringParameters: { 
+        name: this.props.name, 
+        bucket: aws_exports.aws_user_files_s3_bucket 
+      }
     }
     API.get(apiName, path, myInit)
       .then(output => {
         let labelList = Object.keys(output.data.Labels).map(item => {
           return (
             <li key={item}>
-              {output.data.Labels[item].Name} - {output.data.Labels[item].Confidence.toFixed(0)}%
+              {output.data.Labels[item].Name} - 
+              {output.data.Labels[item].Confidence.toFixed(0)}%
             </li>
           )
         })
@@ -55,12 +65,14 @@ class PicInterpretation extends Component {
   }
 }
 
+// Generate filename for S3 object with random integer as prefix
 function fileToKey(data) {
   const randomInt = Math.floor(Math.random() * (100000 - 1 + 1)) + 1;
   const fileName = randomInt + "-" + data.name;
   return fileName;
 }
 
+// Main app class
 class App extends Component {
   constructor(props) {
     super(props);
