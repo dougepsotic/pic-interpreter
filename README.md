@@ -4,4 +4,4 @@ Web page selects/uploads an image to AWS S3 and displays image recognition label
 
 Built using React and AWS Amplify. Amplify automatically creates the IAM, S3, API Gateway, and Lambda cloud resources within AWS.
 
-An open source project of Epsotic - www.epsotic.com
+Pic Interpreter is an open source demo by Epsotic - www.epsotic.com
